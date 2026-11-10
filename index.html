@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Протоколи безпілотних систем · інтерактивна схема</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">AP</span>
+    <div>
+      <b>ПРОТОКОЛИ БЕЗПІЛОТНИХ СИСТЕМ</b>
+      <small>фізичний рівень · транспорт · логіка · застосування</small>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button class="ghost" id="matrixBtn" type="button">Матриця протоколів</button>
+    <button class="ghost" id="resetBtn" type="button">Скинути</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="diagram-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">Узагальнений квадрокоптер</p>
+        <h1>Натисніть на лінію або компонент</h1>
+      </div>
+      <div class="counts">
+        <span><b id="linkCount">0</b> з'єднань</span>
+        <span><b id="protocolCount">0</b> протоколів</span>
+      </div>
+    </div>
+
+    <div class="filters" id="filters" aria-label="Фільтр за класом">
+      <button class="chip is-active" data-cat="all" type="button">Усе</button>
+      <button class="chip" data-cat="rc" type="button">Керування</button>
+      <button class="chip" data-cat="esc" type="button">ESC</button>
+      <button class="chip" data-cat="sensor" type="button">Сенсори</button>
+      <button class="chip" data-cat="telemetry" type="button">Телеметрія</button>
+      <button class="chip" data-cat="video" type="button">Відео</button>
+      <button class="chip" data-cat="companion" type="button">Companion</button>
+      <button class="chip" data-cat="bus" type="button">CAN</button>
+      <button class="chip" data-cat="service" type="button">Сервіс</button>
+    </div>
+
+    <div class="diagram-shell">
+      <svg id="droneSvg" viewBox="0 0 1100 720" role="img" aria-label="Схема квадрокоптера з протоколами з'єднань"></svg>
+      <div class="diagram-hint" id="diagramHint">Лінія = фізичне з'єднання. Колір = клас. Натисніть, щоб відкрити розбір.</div>
+    </div>
+
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <aside class="sidebar" id="sidebar" aria-live="polite"></aside>
+</main>
+
+<footer class="foot">
+  <p>Навчальна схема для лекції. Фізичні рівні та швидкості узагальнені; конкретна плата може мати інші рівні, роз'єми й обмеження.</p>
+</footer>
+
+<div class="modal" id="matrixModal" hidden>
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
+        <p class="eyebrow">Довідник</p>
+        <h2>Матриця протоколів</h2>
+      </div>
+      <button class="icon" id="closeMatrix" type="button" aria-label="Закрити">×</button>
+    </div>
+    <div class="matrix-tools">
+      <input id="matrixSearch" type="search" placeholder="Пошук: SBUS, I2C, MAVLink, CAN...">
+      <span id="matrixCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr><th>Протокол</th><th>Рівень</th><th>Фізика</th><th>Швидкість</th><th>Дуплекс</th><th>Де</th></tr>
+        </thead>
+        <tbody id="matrixBody"></tbody>
+      </table>
+    </div>
+    <p class="micro">Клік по рядку відкриває відповідне з'єднання на схемі.</p>
+  </div>
+</div>
+
+<noscript><div class="noscript">Для інтерактивної схеми потрібен JavaScript.</div></noscript>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
